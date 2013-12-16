@@ -1,5 +1,5 @@
 {
-    "name": "vivify-ideas/acl",
+    "name": "mdsys/laravel_generators",
     "type": "library",
     "description": "ACL component for Laravel 4",
     "keywords": ["acl","laravel"],
