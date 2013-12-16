@@ -40,41 +40,23 @@ class Manager
 
             $permissions = array();
 
-            // get all permissions
-            foreach ($this->allPermissions as $permission) {
-                $permission['allowed_ids'] = null;
-                $permission['excluded_ids'] = null;
-                unset($permission['name']);
-
-                $permissions[$permission['id']] = $permission;
-            }
-
             // overwrite system permissions with user permissions from roles
             foreach ($userPermissionsBasedOnRoles as $userRolePermission) {
-                if (@$userRolePermission['allowed'] === null) {
-                    // allowed is not set, so use from system default
-                    unset($userRolePermission['allowed']);
+                foreach ($this->allPermissions as $permission){
+                   if($permission['id'] == $userRolePermission['id']){
+                        $permissions[$permission['id']] = array_merge($permission,$userRolePermission);
+                   }
                 }
 
-                $temp = $permissions[$userRolePermission['id']];
-
-                $temp = array_merge($temp, $userRolePermission);
-
-                $permissions[$userRolePermission['id']] = $temp;
             }
 
             // overwrite system permissions and user permissions from roles with user permissions
-            foreach ($userPermissions as $userPermission) {
-                if (@$userPermission['allowed'] === null) {
-                    // allowed is not set, so use from system default
-                    unset($userPermission['allowed']);
-                }
-
-                $temp = $permissions[$userPermission['id']];
-
-                $temp = array_merge($temp, $userPermission);
-
-                $permissions[$userPermission['id']] = $temp;
+            foreach ($userPermissions as $userPermission) {               
+                foreach ($this->allPermissions as $permission){
+                   if($permission['id'] == $userPermission['id']){
+                        $permissions[$permission['id']] = array_merge($permission,$userPermission);
+                   }
+                }                
             }
 
             // set finall permissions for particular user

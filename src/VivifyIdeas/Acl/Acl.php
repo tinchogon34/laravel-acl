@@ -144,7 +144,7 @@ class Acl
 
         $groups = (array) $this->manager->getGroups();
         $userPermissions = (array) $this->getUserPermissions();
-
+   
         $list = array_merge($groups, $userPermissions);
 
         $allowed = true;
