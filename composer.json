@@ -1,5 +1,5 @@
 {
-    "name": "mdsys/laravel_generators",
+    "name": "mdsys/laravel-acl",
     "type": "library",
     "description": "ACL component for Laravel 4",
     "keywords": ["acl","laravel"],
